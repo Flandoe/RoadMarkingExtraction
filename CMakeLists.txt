@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(roadmarking)
 
-SET(CMAKE_CXX_FLAGS "-O3 -std=c++11 -w -fopenmp -pthread ")
-SET(CMAKE_C_FLAGS "-O3 -std=c++11 -fopenmp -pthread ")
+SET(CMAKE_CXX_FLAGS "-O3 -std=c++17 -w -fopenmp -pthread ")
+SET(CMAKE_C_FLAGS "-O3 -std=c++17 -fopenmp -pthread ")
 
 #SET(CMAKE_BUILD_TYPE "Debug") 
 #SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
@@ -16,6 +16,8 @@ SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 ####### Required libs #######
 #eigen3, liblas, OpenCV (>=2.4), pcl (>=1.7)
+find_package(Boost REQUIRED COMPONENTS
+serialization timer thread chrono)
 
 #eigen
 find_package(Eigen3 REQUIRED)
@@ -50,7 +52,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include/dxflib)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR}/src SRC_LIST)
 #message("SRC_LIST is " ${SRC_LIST})
 
-SET(DEP_LIBS ${DEP_LIBS} ${OpenCV_LIBS} ${PCL_LIBRARIES} ${libLAS_LIBRARIES})
+SET(DEP_LIBS ${DEP_LIBS} ${OpenCV_LIBS} ${PCL_LIBRARIES} ${libLAS_LIBRARIES} ${Boost_INCLUDE_DIRS})
 
 add_executable(roadmarking ${PROJECT_SOURCE_DIR}/test/roadmarking_main.cpp ${SRC_LIST})
 target_link_libraries(roadmarking ${DEP_LIBS})

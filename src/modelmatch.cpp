@@ -34,6 +34,10 @@ namespace roadmarking
 		io.batchReadFileNamesInFolders(pathName, extension, modelFileNames);
 
 		cout << "Load [" << modelFileNames.size() << "] models from the model pool." << endl;
+		// output modelFileNames
+		for (auto modelFileName : modelFileNames) {
+			std::cout << modelFileName << std::endl;
+		}
 
 		std::vector<pcXYZIPtr> modelPointClouds(modelFileNames.size());
 
@@ -125,7 +129,7 @@ namespace roadmarking
 					roadmarkings[i].category = best_model_index + 2;
 					roadmarkings[i].localization_tranmat_m2s = tran_mat_m2s_best_match;
 					cout << "Object [" << i << "] ---> Category [" << roadmarkings[i].category <<
-						"], overlap: [" << best_overlapping_ratio * 100.0 << "% ], score: [" << match_fitness_best << "]" << endl;
+						"], Match model: "<< modelFileNames[best_model_index] <<" ! overlap: [" << best_overlapping_ratio * 100.0 << "% ], score: [" << match_fitness_best << "]" << endl;
 				}
 			}
 		}

@@ -14,7 +14,7 @@
 // #include <gdal_alg.h>
 // #include <gdal_priv.h>
 // #include <ogrsf_frmts.h>
-
+#include <boost/thread/thread.hpp> 
 // *.las io
 #include <liblas/liblas.hpp>
 #include <liblas/version.hpp>
@@ -139,7 +139,8 @@ namespace roadmarking
 			ostringstream oss_id;
 			//oss_id << setw(4) << setfill('0') << file_index <<  "_" << setw(4) << setfill('0') << i << ".las";
 
-			oss_id << setw(4) << setfill('0') << i << "_" << setw(2) << setfill('0') << roadmarkings[i].category << ".las";
+			// oss_id << setw(4) << setfill('0') << i << "_" << setw(2) << setfill('0') << roadmarkings[i].category << ".las";
+			oss_id << setw(2) << setfill('0') << roadmarkings[i].category << "_" << setw(2) << setfill('0') << i << ".las";
 
 			// outputFileName = outputFolder + "\\" + oss.str(); // Windows
 			outputFileName = outputFolder + "/" + oss_id.str(); // Ubuntu
@@ -147,7 +148,7 @@ namespace roadmarking
 			liblas::Color lasColor;
 
 			switch (roadmarkings[i].category)
-			{
+			{//不同类颜色不一样
 			case 1:
 				lasColor.SetRed(0);
 				lasColor.SetGreen(255);

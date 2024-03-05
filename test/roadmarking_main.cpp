@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     {
         model_path = argv[3];
         parm_file = argv[4];
+        std::cout<<parm_file<<std::endl;
     }
 
     /*-------------------------------------------------Readme----------------------------------------------------*/
